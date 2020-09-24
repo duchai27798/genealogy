@@ -11,31 +11,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a3720bf-7752-4ab5-84f6-2849a267f7e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Laravel_9_23_20__1_41_PM.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/demo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Gender.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/ParentInfo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/ParentStatus.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Person.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/PersonStatus.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Position.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_083137_create_person_statuses_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_083253_create_people_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_084706_create_genders_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_084731_create_positions_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_084910_create_parent_infos_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_084922_create_parent_statuses_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/LoginRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/RegisterRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Role.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/Core/BaseRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/Core/Repository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Repositories/UserRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_24_000016_update_parent_infos_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_24_000017_create_roles_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_09_24_000018_update_users_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeders/RolesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/API/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/API/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_23_083137_create_person_statuses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_000010_create_person_statuses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_23_083253_create_people_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_000015_create_people_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_23_084706_create_genders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_000011_create_genders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_23_084731_create_positions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_000012_create_positions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_23_084910_create_parent_infos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_000014_create_parent_infos_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_23_084922_create_parent_statuses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_23_000013_create_parent_statuses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -186,8 +189,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Repositories/Core" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -204,7 +213,8 @@
       <option name="presentableId" value="Default" />
       <updated>1600843151393</updated>
       <workItem from="1600843153873" duration="55000" />
-      <workItem from="1600843225036" duration="10330000" />
+      <workItem from="1600843225036" duration="12761000" />
+      <workItem from="1600909335673" duration="21074000" />
     </task>
     <servers />
   </component>
@@ -227,9 +237,25 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="289" y="98" width="1022" height="737" key="SettingsEditor" timestamp="1600843541183">
+    <state x="589" y="144" width="412" height="645" key="#com.intellij.ide.util.MemberChooser" timestamp="1600928808850">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state x="289" y="98" width="1022" height="737" key="SettingsEditor/0.27.1600.873@0.27.1600.873" timestamp="1600843541183" />
+    <state x="589" y="144" width="412" height="645" key="#com.intellij.ide.util.MemberChooser/0.27.1600.873@0.27.1600.873" timestamp="1600928808850" />
+    <state x="547" y="259" width="525" height="423" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1600929491683">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="547" y="259" width="525" height="423" key="#com.intellij.ide.util.TreeClassChooserDialog/0.27.1600.873@0.27.1600.873" timestamp="1600929491683" />
+    <state x="884" y="27" width="706" height="873" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1600923061778">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="884" y="27" width="706" height="873" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1600.873@0.27.1600.873" timestamp="1600923061778" />
+    <state x="518" y="183" width="593" height="568" key="NewPhpClassDialog" timestamp="1600929531102">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="518" y="183" width="593" height="568" key="NewPhpClassDialog/0.27.1600.873@0.27.1600.873" timestamp="1600929531102" />
+    <state x="289" y="98" width="1022" height="737" key="SettingsEditor" timestamp="1600922808211">
+      <screen x="0" y="27" width="1600" height="873" />
+    </state>
+    <state x="289" y="98" width="1022" height="737" key="SettingsEditor/0.27.1600.873@0.27.1600.873" timestamp="1600922808211" />
   </component>
 </project>

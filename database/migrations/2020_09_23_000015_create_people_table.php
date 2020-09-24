@@ -14,7 +14,7 @@ class CreatePeopleTable extends Migration
     public function up()
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->id();
+            $table->id('people_id');
             $table->string('firstname');
             $table->string('lastname');
             $table->timestamp('birthday');
@@ -22,15 +22,15 @@ class CreatePeopleTable extends Migration
             $table->string('phone_number');
             $table->string('address');
             $table->string('description');
-            $table->bigInteger('status_id')->unsigned();
-            $table->bigInteger('parent_id')->unsigned();
+            $table->bigInteger('person_status_id')->unsigned();
+            $table->bigInteger('parent_info_id')->unsigned();
             $table->bigInteger('position_id')->unsigned();
             $table->bigInteger('gender_id')->unsigned();
 
-            $table->foreign('status_id')->references('id')->on('person_statuses')->onCascade('delete');
-//            $table->foreign('parent_id')->references('id')->on('parent_infos')->onCascade('delete');
-//            $table->foreign('position_id')->references('id')->on('positions')->onCascade('delete');
-//            $table->foreign('gender_id')->references('id')->on('genders')->onCascade('delete');
+            $table->foreign('person_status_id')->references('person_status_id')->on('person_statuses')->onCascade('delete');
+            $table->foreign('position_id')->references('position_id')->on('positions')->onCascade('delete');
+            $table->foreign('gender_id')->references('gender_id')->on('genders')->onCascade('delete');
+            $table->foreign('parent_info_id')->references('parent_info_id')->on('parent_infos')->onCascade('delete');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonStatusesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreatePersonStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('person_statuses', function (Blueprint $table) {
-            $table->id();
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id('role_id');
             $table->string('name');
         });
     }
@@ -26,6 +26,6 @@ class CreatePersonStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('person_statuses');
+        Schema::dropIfExists('roles');
     }
 }

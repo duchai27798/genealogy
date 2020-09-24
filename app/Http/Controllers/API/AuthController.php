@@ -3,28 +3,25 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\RegisterRequest;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:55',
-            'email' => 'email|required|unique:users',
-            'password' => 'required'
-        ]);
+    protected $userRepository;
 
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
+    public function register(RegisterRequest $request)
+    {
         $request['password'] = bcrypt($request['password']);
 
-        if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
-        }
-
-        $user = User::create($request->toArray());
+        $user = $this->userRepository->create($request->all());
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
@@ -33,30 +30,16 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
-        }
-
-        $user = User::where('email', $request->email)->first();
+        $user = $this->userRepository->findUserByEmail($request->email);
 
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 return response(['token' => $user->createToken('authToken')->accessToken], 200);
             }
+
+            return response(['message' => 'Email or password is wrong!'], 422);
         }
 
-        return response(['message' => 'Email or password is wrong!'], 422);
-    }
-
-    public function logout($request)
-    {
-        $token = $request->user()->token;
-        $token->revoke();
-        return response(['message' => 'You have been successfully logged out!']);
+        return response(['message' => 'User isn\'t existed!'], 422);
     }
 }

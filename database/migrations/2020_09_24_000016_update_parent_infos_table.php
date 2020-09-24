@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParentStatusesTable extends Migration
+class UpdateParentInfosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateParentStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('parent_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description');
+        Schema::table('parent_infos', function (Blueprint $table) {
+            $table->foreign('mother_id')->references('people_id')->on('people')->onCascade('delete');
+            $table->foreign('father_id')->references('people_id')->on('people')->onCascade('delete');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateParentStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parent_statuses');
+        //
     }
 }
