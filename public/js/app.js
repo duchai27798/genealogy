@@ -19323,6 +19323,45 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/login.js":
+/*!*************************************!*\
+  !*** ./resources/js/admin/login.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#login-form').submit(function (e) {
+  e.preventDefault();
+  /* Get form data */
+
+  var x = $(this).serializeArray();
+  var formData = {};
+  $.each(x, function (i, field) {
+    formData[field.name] = field.value;
+  });
+  $.ajax({
+    url: '/login',
+    method: 'post',
+    dataType: 'json',
+    data: formData,
+    success: function success(res) {
+      if (_.get(res, 'accessToken')) {
+        localStorage.setItem('accessToken', _.get(res, 'accessToken'));
+        window.location.href = '/admin';
+      } else {
+        $('#login-error').html('Failed login');
+      }
+    },
+    error: function error(res) {
+      var error = _.flatten(_.values(_.get(res, 'responseJSON.errors')));
+
+      $('#login-error').html(_.join(error, '<br>') || _.get(res, 'responseJSON.message'));
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -19331,6 +19370,8 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./admin/login */ "./resources/js/admin/login.js");
 
 /***/ }),
 

@@ -1,0 +1,10 @@
+.login-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/bg-login.jpg') no-repeat center;
+    background-size: cover;
+
+    .login-wrapper {
+        border-radius: 10px;
+        padding: 40px 30px;
+        background-color: #ffffff;
+    }
+}
