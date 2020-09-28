@@ -15,7 +15,7 @@ class ClanSeeder extends Seeder
     public function run()
     {
         Clan::insert([
-            ['user_id' => 1, 'date' => '2020-01-01', 'location_address' => ''],
+            ['user_id' => 2, 'name' => 'Nguyễn Đức', 'date' => '2020-01-01', 'location_address' => ''],
         ]);
     }
 }

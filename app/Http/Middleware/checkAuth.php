@@ -18,7 +18,7 @@ class checkAuth
     {
         $userSession = $request->session()->get('userSession', null);
 
-        if ($userSession && $userSession->roleId === 1) {
+        if ($userSession) {
             return $next($request);
         }
 

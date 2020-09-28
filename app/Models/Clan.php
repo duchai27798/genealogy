@@ -11,6 +11,7 @@ class Clan extends Model
 
     protected $fillable = [
         'user_id',
+        'name',
         'date',
         'location_address',
     ];
