@@ -26,13 +26,13 @@ class CreatePeopleTable extends Migration
             $table->bigInteger('parent_info_id')->unsigned();
             $table->bigInteger('position_id')->unsigned();
             $table->bigInteger('gender_id')->unsigned();
-            $table->bigInteger('clan_id')->unsigned();
+            $table->bigInteger('branch_id')->unsigned();
 
             $table->foreign('person_status_id')->references('person_status_id')->on('person_statuses')->onCascade('delete');
             $table->foreign('position_id')->references('position_id')->on('positions')->onCascade('delete');
             $table->foreign('gender_id')->references('gender_id')->on('genders')->onCascade('delete');
             $table->foreign('parent_info_id')->references('parent_info_id')->on('parent_infos')->onCascade('delete');
-            $table->foreign('clan_id')->references('clan_id')->on('clans')->onCascade('delete');
+            $table->foreign('branch_id')->references('branch_id')->on('branches')->onCascade('delete');
         });
     }
 

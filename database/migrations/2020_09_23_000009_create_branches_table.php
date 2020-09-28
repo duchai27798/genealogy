@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClansTable extends Migration
+class CreateBranchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateClansTable extends Migration
      */
     public function up()
     {
-        Schema::create('clans', function (Blueprint $table) {
-            $table->id('clan_id');
-            $table->bigInteger('user_id')->unsigned()->unique();
+        Schema::create('branches', function (Blueprint $table) {
+            $table->id('branch_id');
+            $table->bigInteger('clan_id')->unsigned();
             $table->timestamp('date');
-            $table->string('address');
+            $table->string('location_address');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('user_id')->on('users')->onCascade('delete');
+            $table->foreign('clan_id')->references('clan_id')->on('clans')->onCascade('delete');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateClansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clans');
+        Schema::dropIfExists('branches');
     }
 }

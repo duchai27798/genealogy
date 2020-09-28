@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateClansTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('clans', function (Blueprint $table) {
+            $table->id('clan_id');
+            $table->bigInteger('user_id')->unsigned()->unique();
+            $table->timestamp('date');
+            $table->string('location_address');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('user_id')->on('users')->onCascade('delete');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('clans');
+    }
+}
