@@ -24,12 +24,12 @@ abstract class BaseRepository implements Repository
 
     public function getAll()
     {
-        return $this->_model->all();
+        return $this->_model::all();
     }
 
     public function find($id)
     {
-        return $this->_model->find($id);
+        return $this->_model::find($id);
     }
 
     public function create(array $object)

@@ -1,5 +1,7 @@
 @extends('layouts.admin-layout')
 
 @section('body')
-    <h1>home admin</h1>
+    <div class="container">
+        <h1>home admin</h1>
+    </div>
 @endsection

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\PersonController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\UserManagement;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'handleLogin'])->name('handle-login');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function () {
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-Route::post('/login', [LoginController::class, 'handleLogin'])->name('handle-login');
+    Route::group(['prefix' => 'user-management'], function () {
+        Route::get('/', [UserManagement::class, 'userManager'])->name('user-management');
+    });
 
-Route::resource('admin/persons', PersonController::class);
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'handleRegister'])->name('handle-register');
+});
