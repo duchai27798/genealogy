@@ -16,7 +16,7 @@
 <body>
     <div class="min-vh-100">
         @include('layouts.admin-header')
-        @yield('body')
+        @yield('content')
     </div>
 </body>
 </html>

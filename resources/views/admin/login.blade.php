@@ -1,6 +1,6 @@
 @extends('layouts.main-layout')
 
-@section('body')
+@section('content')
     <div class="login-container d-flex justify-content-center align-items-center min-vh-100">
         <form id="login-form" class="d-flex flex-column form-group login-wrapper" action="{{ route('handle-login') }}" method="POST">
             @csrf

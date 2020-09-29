@@ -15,13 +15,17 @@ class PersonController extends Controller
         $this->genderRepository = $genderRepository;
     }
 
+    function dashboard() {
+        return view('admin.person-management.dashboard', ['route' => 'person']);
+    }
+
     public function create()
     {
-        return view('admin.person-editor', ['genders' => $this->genderRepository->getAll()]);
+        return view('admin.person-management.person-editor', ['route' => 'person', 'genders' => $this->genderRepository->getAll()]);
     }
 
     public function handleCreate(PersonRequest $request)
     {
-        return view('admin.person-editor');
+        dd($request->all());
     }
 }

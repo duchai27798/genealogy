@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\PersonController;
 use App\Http\Controllers\Admin\UserManagement;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function ()
 
     Route::group(['prefix' => 'user-management'], function () {
         Route::get('/', [UserManagement::class, 'userManager'])->name('user-management');
+    });
+
+    Route::group(['prefix' => 'person-management', 'as' => 'persons.'], function () {
+        Route::get('/', [PersonController::class, 'dashboard'])->name('management');
+        Route::get('/create', [PersonController::class, 'create'])->name('create');
+        Route::post('/create', [PersonController::class, 'handleCreate'])->name('handle-create');
     });
 
     Route::get('/register', [AuthController::class, 'register'])->name('register');

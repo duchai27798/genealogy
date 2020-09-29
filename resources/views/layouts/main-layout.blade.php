@@ -14,6 +14,6 @@
     <title>Document</title>
 </head>
 <body>
-    @yield('body')
+    @yield('content')
 </body>
 </html>

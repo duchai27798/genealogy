@@ -1,8 +1,8 @@
 @extends('layouts.admin-layout')
 
-@section('body')
+@section('content')
     <div class="d-flex justify-content-center mt-4">
-        <form id="login-form" class="login-form d-flex flex-column form-group" action="{{ route('persons.store') }}" method="POST">
+        <form id="login-form" class="login-form d-flex flex-column form-group" action="{{ route('persons.handle-create') }}" method="POST">
             @csrf
             <h3 class="size-22 font-weight-bolder mb-4 text-center">Create Person</h3>
             <div id="form-person-error" class="alert-danger size-14 m-b-20"></div>

@@ -1,6 +1,6 @@
 @extends('layouts.main-layout')
 
-@section('body')
+@section('content')
     <div class="login-container d-flex justify-content-center align-items-center min-vh-100">
         <form id="login-form" autocomplete="off" class="d-flex flex-column form-group login-wrapper" action="{{ route('handle-register') }}" method="POST">
             @csrf
