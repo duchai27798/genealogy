@@ -23,7 +23,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | By default, Passport uses auto-incrementing primary keys when assigning
-    | IDs to clients. However, if Passport is installed using the provided
+    | IDs to client. However, if Passport is installed using the provided
     | --uuids switch, this will be set to "true" and UUIDs will be used.
     |
     */
