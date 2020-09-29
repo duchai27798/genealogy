@@ -187,6 +187,11 @@
   opacity: 0.5;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .size-14 {
   font-size: 0.875rem;
 }
