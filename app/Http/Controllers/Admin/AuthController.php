@@ -4,22 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Models\User;
-use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    protected $userRepository;
-    protected $roleRepository;
+    private $userRepository;
 
-    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->roleRepository = $roleRepository;
     }
 
     public function login()
@@ -27,7 +22,7 @@ class AuthController extends Controller
         return view('admin.login');
     }
 
-    public function handleLogin(Request $request)
+    public function handleLogin(LoginRequest $request)
     {
         $user = $this->userRepository->findUserByEmail($request->email);
 
@@ -38,26 +33,9 @@ class AuthController extends Controller
             }
         }
 
-        return redirect()->route('login');
-    }
-
-    public function register()
-    {
-        return view('admin.register', ['roles' => $this->roleRepository->getAll()]);
-    }
-
-    public function handleRegister(RegisterRequest $request)
-    {
-        $user = new User();
-
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->role_id = $request->input('role_id');
-
-        $user->save();
-
-        return redirect()->route('dashboard');
+        return redirect()->route('login')
+            ->with('message', 'Email or password is wrong.')
+            ->with('email', $request->email);
     }
 
     public function logout(Request $request)

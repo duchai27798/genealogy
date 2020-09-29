@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\Redirector;
 
 class LoginRequest extends FormRequest
 {
@@ -27,5 +28,14 @@ class LoginRequest extends FormRequest
             'email' => 'required|email',
             'password' => 'required'
         ];
+    }
+
+    public function setRedirector(Redirector $redirector)
+    {
+        $this->redirector = $redirector;
+
+        $this->session()->flash('email', $this->email);
+
+        return $this;
     }
 }

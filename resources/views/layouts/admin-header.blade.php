@@ -5,11 +5,14 @@
                 @case('person')
                     <li><a href="{{ route('persons.management') }}">Person Management</a></li>
                     <li class="m-l-20"><a href="{{ route('persons.create') }}">Create Person</a></li>
-                    <li class="m-l-20"><a href="">Edit Person</a></li>
+                    @break
+                @case('user')
+                    <li><a href="{{ route('users.management') }}">User Management</a></li>
+                    <li class="m-l-20"><a href="{{ route('users.create') }}">Create User</a></li>
                     @break
                 @default
-                    <li><a href="{{ route('user-management') }}">User Management</a></li>
-                    <li class="m-l-20"><a href="{{ route('persons.management') }}">Person Management</a></li>
+                    <li><a href="{{ route('users.management') }}">User Management</a></li>
+                    <li class="m-l-20 disabled-half"><a href="{{ route('persons.management') }}">Person Management</a></li>
             @endswitch
         </ul>
         <div>

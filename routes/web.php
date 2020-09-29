@@ -24,8 +24,10 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-    Route::group(['prefix' => 'user-management'], function () {
-        Route::get('/', [UserManagement::class, 'userManager'])->name('user-management');
+    Route::group(['prefix' => 'user-management', 'as' => 'users.'], function () {
+        Route::get('/', [UserManagement::class, 'dashboard'])->name('management');
+        Route::get('/create', [UserManagement::class, 'create'])->name('create');
+        Route::post('/create', [UserManagement::class, 'handleCreate'])->name('handle-create');
     });
 
     Route::group(['prefix' => 'person-management', 'as' => 'persons.'], function () {

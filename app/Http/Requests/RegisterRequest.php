@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\Redirector;
 
 class RegisterRequest extends FormRequest
 {
@@ -26,15 +27,18 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:55',
             'email' => 'email|required|unique:users',
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed|min:6',
             'role_id' => 'required|exists:roles,role_id'
         ];
     }
 
-    public function messages()
+    public function setRedirector(Redirector $redirector)
     {
-        return [
-//            'role_id.exists' => 'role_id not found!'
-        ];
+        $this->redirector = $redirector;
+
+        $this->session()->flash('email', $this->email);
+        $this->session()->flash('name', $this->name);
+
+        return $this;
     }
 }

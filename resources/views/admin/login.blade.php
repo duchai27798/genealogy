@@ -6,9 +6,17 @@
             @csrf
             <h3 class="size-22 font-weight-bolder mb-4 text-center">Login</h3>
 
+            @if(session('message'))
+                <div class="alert alert-danger">
+                    <ul class="pl-0 nav flex-column">
+                        <li>{{ session('message') }}</li>
+                    </ul>
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="alert alert-danger">
-                    <ul class="pl-0">
+                    <ul class="pl-0 nav flex-column">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -17,7 +25,7 @@
             @endif
 
             <div class="input-group m-b-20">
-                <input type="text" class="form-control" placeholder="Email" name="email">
+                <input type="text" class="form-control" placeholder="Email" name="email" value="{{ session('email') }}">
             </div>
             <div class="input-group m-b-30">
                 <input type="password" class="form-control" placeholder="Password" name="password">

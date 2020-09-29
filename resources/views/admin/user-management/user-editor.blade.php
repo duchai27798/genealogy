@@ -1,10 +1,10 @@
-@extends('layouts.main-layout')
+@extends('layouts.admin-layout')
 
 @section('content')
-    <div class="login-container d-flex justify-content-center align-items-center min-vh-100">
-        <form id="login-form" autocomplete="off" class="d-flex flex-column form-group login-wrapper" action="{{ route('handle-register') }}" method="POST">
+    <div class="d-flex justify-content-center mt-5 min-vh-100">
+        <form id="login-form" class="d-flex flex-column form-group login-wrapper" action="{{ route('users.handle-create') }}" method="POST">
             @csrf
-            <h3 class="size-22 font-weight-bolder mb-4 text-center">Register</h3>
+            <h3 class="size-22 font-weight-bolder mb-4 text-center">Create User</h3>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -17,10 +17,10 @@
             @endif
 
             <div class="input-group m-b-20">
-                <input type="text" class="form-control" placeholder="Name" name="name">
+                <input type="text" class="form-control" placeholder="Name" name="name" value="{{ session('name') }}">
             </div>
             <div class="input-group m-b-20">
-                <input type="text" class="form-control" autocomplete="off" placeholder="Email" name="email">
+                <input type="text" class="form-control" placeholder="Email" name="email" value="{{ session('email') }}">
             </div>
             <div class="input-group m-b-20">
                 <input type="password" class="form-control" placeholder="Password" name="password">
@@ -29,7 +29,7 @@
                 <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation">
             </div>
 
-            <select name="role_id" class="custom-select m-b-30" disabled>
+            <select name="role_id" class="custom-select m-b-30">
                 @foreach($roles as $role)
                     @if($role['name'] === 'user')
                         <option value="{{ $role['role_id'] }}" selected>{{ $role['name'] }}</option>
