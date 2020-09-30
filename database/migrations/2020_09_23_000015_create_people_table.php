@@ -22,11 +22,12 @@ class CreatePeopleTable extends Migration
             $table->string('phone_number');
             $table->string('address');
             $table->string('description');
-            $table->bigInteger('person_status_id')->unsigned();
-            $table->bigInteger('parent_info_id')->unsigned();
-            $table->bigInteger('position_id')->unsigned();
-            $table->bigInteger('gender_id')->unsigned();
-            $table->bigInteger('branch_id')->unsigned();
+            $table->bigInteger('person_status_id')->nullable()->unsigned();
+            $table->bigInteger('parent_info_id')->nullable()->unsigned();
+            $table->bigInteger('position_id')->nullable()->unsigned();
+            $table->bigInteger('gender_id')->nullable()->unsigned();
+            $table->bigInteger('branch_id')->nullable()->unsigned();
+            $table->timestamps();
 
             $table->foreign('person_status_id')->references('person_status_id')->on('person_statuses')->onCascade('delete');
             $table->foreign('position_id')->references('position_id')->on('positions')->onCascade('delete');

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PersonController;
 use App\Http\Controllers\Admin\UserManagement;
+use App\Http\Controllers\Client\AjaxController;
 use App\Http\Controllers\Client\SiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function ()
 
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'handleRegister'])->name('handle-register');
+});
+
+Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
+    Route::get('/resource-tree', [AjaxController::class, 'getResourceTree'])->name('resource-tree');
 });

@@ -1,13 +1,34 @@
 @extends('layouts.main-layout')
 
 @section('content')
-    <div id="tree-diagram" style="background-color: white; border: solid 1px black; width: 100vw; height: calc(100vh - 50px)"></div>
-    <button class="btn btn-secondary" id="zoomToFit">Zoom to Fit</button>
-    <button class="btn btn-secondary" id="centerRoot">Center on root</button>
+    <div class="chart" id="genealogy-diagram"></div>
+
     <script src="{{ asset('js/tree-diagram.js') }}"></script>
     <script>
-        $(document).ready(function () {
-            initGenealogy();
+        $.ajax({
+            url: '{{ route('ajax.resource-tree') }}',
+            method: 'get',
+            success: function (data) {
+                let listData = _.map(data, item => ({
+                    id: item.id,
+                    parent: _.get(item, 'parent.father_id'),
+                    text: {
+                        name: item.name
+                    },
+                    image: 'images/dummy.jpg',
+                    children: []
+                }));
+
+                _.forEach(listData, item => {
+                    if (item.parent) {
+                        listData[item.parent - 1].children.push(item);
+                    }
+                })
+
+                let root = _.find(listData, item => !item.parent);
+
+                new Treant(chart_config(root));
+            }
         })
     </script>
 @endsection
