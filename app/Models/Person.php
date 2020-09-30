@@ -29,4 +29,11 @@ class Person extends Model
     {
         return $this->belongsTo(ParentInfo::class, 'parent_info_id');
     }
+
+    public function parentInfo()
+    {
+        $parent = $this->parent();
+
+        return $parent;
+    }
 }

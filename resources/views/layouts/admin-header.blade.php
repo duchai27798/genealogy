@@ -12,7 +12,7 @@
                     @break
                 @default
                     <li><a href="{{ route('users.management') }}">User Management</a></li>
-                    <li class="m-l-20 disabled-half"><a href="{{ route('persons.management') }}">Person Management</a></li>
+                    <li class="m-l-20"><a href="{{ route('persons.management') }}">Person Management</a></li>
             @endswitch
         </ul>
         <div>
