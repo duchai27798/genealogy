@@ -16,7 +16,7 @@ class CreateClansTable extends Migration
         Schema::create('clans', function (Blueprint $table) {
             $table->id('clan_id');
             $table->string('name');
-            $table->bigInteger('user_id')->unsigned()->unique();
+            $table->bigInteger('user_id')->unsigned()->nullable()->unique();
             $table->timestamp('date');
             $table->string('location_address');
             $table->timestamps();

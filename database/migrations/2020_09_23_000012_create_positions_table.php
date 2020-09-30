@@ -17,6 +17,7 @@ class CreatePositionsTable extends Migration
             $table->id('position_id');
             $table->string('name');
             $table->string('description');
+            $table->timestamps();
         });
     }
 

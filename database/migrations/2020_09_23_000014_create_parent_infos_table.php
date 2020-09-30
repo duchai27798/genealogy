@@ -15,12 +15,13 @@ class CreateParentInfosTable extends Migration
     {
         Schema::create('parent_infos', function (Blueprint $table) {
             $table->id('parent_info_id');
-            $table->bigInteger('mother_id')->unsigned();
-            $table->bigInteger('father_id')->unsigned();
-            $table->bigInteger('parent_status_id')->unsigned();
+            $table->bigInteger('mother_id')->nullable()->unsigned();
+            $table->bigInteger('father_id')->nullable()->unsigned();
+            $table->bigInteger('parent_status_id')->nullable()->unsigned();
             $table->timestamp('wedding_date');
             $table->timestamp('divorce_date');
             $table->string('description');
+            $table->timestamps();
 
             $table->foreign('parent_status_id')->references('parent_status_id')->on('parent_statuses')->onCascade('delete');
         });

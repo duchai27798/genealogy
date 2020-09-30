@@ -17,6 +17,7 @@ class CreateParentStatusesTable extends Migration
             $table->id('parent_status_id');
             $table->string('name');
             $table->string('description');
+            $table->timestamps();
         });
     }
 
