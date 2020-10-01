@@ -56,7 +56,7 @@ class PersonController extends Controller
 
         $this->personRepository->create($user);
 
-        return redirect()->route('persons.management');
+        return redirect()->route('person-management');
     }
 
     public function edit($id)
@@ -78,7 +78,7 @@ class PersonController extends Controller
 
         $this->personRepository->update($id, $user);
 
-        return redirect()->route('persons.management');
+        return redirect()->route('person-management');
     }
 
     public function getListGender()

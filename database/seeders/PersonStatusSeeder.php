@@ -15,8 +15,8 @@ class PersonStatusSeeder extends Seeder
     public function run()
     {
         PersonStatus::insert([
-            ['name' => 'live'],
-            ['name' => 'died']
+            ['name' => 'alive'],
+            ['name' => 'dead']
         ]);
     }
 }

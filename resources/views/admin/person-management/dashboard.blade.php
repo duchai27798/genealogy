@@ -33,7 +33,7 @@
                             <td>{{ $person->firstname }}</td>
                             <td>{{ $person->lastname }}</td>
                             <td>{{ $person->gender->name }}</td>
-                            <td>{{ $person->birthday }}</td>
+                            <td>{{ $person->getBirthday() }}</td>
                             <td>{{ $person->status->name }}</td>
                             <td>
                                 <div><span class="mr-2">Father:</span>{{ $person->getFatherName() }}</div>

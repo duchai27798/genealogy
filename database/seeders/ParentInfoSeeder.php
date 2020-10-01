@@ -17,7 +17,7 @@ class ParentInfoSeeder extends Seeder
         ParentInfo::insert([
             ['mother_id' => null, 'father_id' => 1, 'parent_status_id' => null, 'wedding_date' => '2020-01-01', 'divorce_date' => '2020-01-01', 'description' => ''],
             ['mother_id' => null, 'father_id' => 2, 'parent_status_id' => null, 'wedding_date' => '2020-01-01', 'divorce_date' => '2020-01-01', 'description' => ''],
-            ['mother_id' => null, 'father_id' => 5, 'parent_status_id' => null, 'wedding_date' => '2020-01-01', 'divorce_date' => '2020-01-01', 'description' => ''],
+            ['mother_id' => 5, 'father_id' => null, 'parent_status_id' => null, 'wedding_date' => '2020-01-01', 'divorce_date' => '2020-01-01', 'description' => ''],
             ['mother_id' => null, 'father_id' => 10, 'parent_status_id' => null, 'wedding_date' => '2020-01-01', 'divorce_date' => '2020-01-01', 'description' => ''],
         ]);
     }

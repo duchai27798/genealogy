@@ -3,8 +3,9 @@
         <ul class="d-flex align-items-center nav">
             @switch($route ?? null)
                 @case('person')
-                    <li><a href="{{ route('persons.management') }}">Person Management</a></li>
+                    <li><a href="{{ route('person-management') }}">Person Management</a></li>
                     <li class="m-l-20"><a href="{{ route('persons.create') }}">Create Person</a></li>
+                    <li class="m-l-20"><a href="{{ route('parents.create') }}">Create Parent</a></li>
                     @break
                 @case('user')
                     <li><a href="{{ route('users.management') }}">User Management</a></li>
@@ -12,7 +13,7 @@
                     @break
                 @default
                     <li><a href="{{ route('users.management') }}">User Management</a></li>
-                    <li class="m-l-20"><a href="{{ route('persons.management') }}">Person Management</a></li>
+                    <li class="m-l-20"><a href="{{ route('person-management') }}">Person Management</a></li>
             @endswitch
         </ul>
         <div>
