@@ -233,7 +233,12 @@
   font-size: 3.875rem;
 }
 
-.admin-header {
+.header-wrapper {
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff;
+}
+.header-wrapper .admin-header {
   height: 60px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
@@ -317,4 +322,8 @@ abbr, acronym {
   margin-right: 10px;
   width: 80px;
   height: 80px;
+}
+
+.table-custom th, .table-custom td {
+  vertical-align: middle !important;
 }

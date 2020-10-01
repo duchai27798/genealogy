@@ -15,8 +15,10 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="min-vh-100">
-        @include('layouts.admin-header')
+    <div class="vh-100 overflow-auto">
+        <div class="position-sticky header-wrapper">
+            @include('layouts.admin-header')
+        </div>
         @yield('content')
     </div>
 </body>

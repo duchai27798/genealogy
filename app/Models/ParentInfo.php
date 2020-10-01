@@ -22,6 +22,16 @@ class ParentInfo extends Model
 
     public function children()
     {
-        return $this->hasMany(Person::class);
+        return $this->hasMany(Person::class, 'parent_info_id', 'parent_info_id');
+    }
+
+    public function father()
+    {
+        return $this->hasOne(Person::class, 'people_id', 'father_id');
+    }
+
+    public function mother()
+    {
+        return $this->hasOne(Person::class, 'people_id', 'mother_id');
     }
 }

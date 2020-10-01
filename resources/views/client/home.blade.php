@@ -11,7 +11,7 @@
             success: function (data) {
                 let listData = _.map(data, item => ({
                     id: item.id,
-                    parent: _.get(item, 'parent.father_id'),
+                    parent: _.get(item, 'parent.father_id') || _.get(item, 'parent.mother_id'),
                     text: {
                         name: item.name
                     },

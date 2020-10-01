@@ -7,16 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class PersonRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,7 +14,16 @@ class PersonRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'gender_id' => 'required',
+            'person_status_id' => 'required',
+            'parent_info_id' => 'required',
+            'birthday' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'description' => 'required',
         ];
     }
 }

@@ -1,4 +1,10 @@
-.admin-header {
-    height: 60px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+.header-wrapper {
+    top: 0;
+    z-index: 1;
+    background-color: #ffffff;
+
+    .admin-header {
+        height: 60px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
 }

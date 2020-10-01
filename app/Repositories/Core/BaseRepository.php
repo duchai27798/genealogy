@@ -42,7 +42,7 @@ abstract class BaseRepository implements Repository
         $result = $this->_model::find($id);
 
         if ($result) {
-            return $this->_model->update($object);
+            return $result->update($object);
         }
 
         return false;

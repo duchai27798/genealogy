@@ -38,6 +38,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function ()
         Route::get('/', [PersonController::class, 'dashboard'])->name('management');
         Route::get('/create', [PersonController::class, 'create'])->name('create');
         Route::post('/create', [PersonController::class, 'handleCreate'])->name('handle-create');
+        Route::get('/edit/{id}', [PersonController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [PersonController::class, 'handleEdit'])->name('handle-edit');
     });
 
     Route::get('/register', [AuthController::class, 'register'])->name('register');

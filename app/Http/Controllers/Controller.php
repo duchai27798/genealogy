@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\classes\UserSession;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,8 +14,11 @@ class Controller extends BaseController
 
     protected function setUserSession(Request $request, $user)
     {
-        $userSession = new UserSession($user->name, $user->email, $user->role_id);
-        $request->session()->put('userSession', $userSession);
+        $request->session()->put('userSession', (object) [
+            'name' => $user->name,
+            'email' => $user->email,
+            'roleId' => $user->roleId
+        ]);
     }
 
     protected function getUserSession(Request $request)
