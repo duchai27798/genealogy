@@ -23,6 +23,8 @@ class AjaxController extends Controller
             $dataResource[$person->people_id] = (object) [
                 'id' => $person->people_id,
                 'name' => $person->getFullName(),
+                'birthday' => $person->getBirthday(),
+                'gender' => $person->gender->name,
                 'parent' => $person->parent
             ];
         }
