@@ -43,10 +43,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function ()
             Route::post('/create', [PersonController::class, 'handleCreate'])->name('handle-create');
             Route::get('/edit/{id}', [PersonController::class, 'edit'])->name('edit');
             Route::post('/edit/{id}', [PersonController::class, 'handleEdit'])->name('handle-edit');
+            Route::get('/delete/{id}', [PersonController::class, 'destroy'])->name('delete');
         });
 
         Route::group(['prefix' => 'parents', 'as' => 'parents.'], function () {
             Route::get('/create', [ParentController::class, 'create'])->name('create');
+            Route::post('/create', [ParentController::class, 'handleCreate'])->name('handle-create');
         });
     });
 

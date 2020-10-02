@@ -8,6 +8,7 @@ use App\Repositories\GenderRepository;
 use App\Repositories\ParentInfoRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\PersonStatusRepository;
+use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
@@ -81,6 +82,13 @@ class PersonController extends Controller
         return redirect()->route('person-management');
     }
 
+    public function destroy(Request $request, $id)
+    {
+        $this->personRepository->delete($id);
+
+        return redirect()->route('person-management');
+    }
+
     public function getListGender()
     {
         $listGenders = $this->genderRepository->getAll();
@@ -108,7 +116,7 @@ class PersonController extends Controller
     public function getListParent()
     {
         $listParent = $this->parentInfoRepository->getAll();
-        $parents = collect();
+        $parents = collect([null => 'NULL']);
 
         foreach ($listParent as $parent) {
             if ($parent->father) {

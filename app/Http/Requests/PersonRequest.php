@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\Redirector;
 
 class PersonRequest extends FormRequest
 {
@@ -18,12 +19,20 @@ class PersonRequest extends FormRequest
             'lastname' => 'required',
             'gender_id' => 'required',
             'person_status_id' => 'required',
-            'parent_info_id' => 'required',
             'birthday' => 'required',
             'email' => 'required|email',
             'phone_number' => 'required',
             'address' => 'required',
             'description' => 'required',
         ];
+    }
+
+    public function setRedirector(Redirector $redirector)
+    {
+        $this->redirector = $redirector;
+
+        $this->session()->flash('cache', $this->all());
+
+        return $this;
     }
 }

@@ -2,9 +2,18 @@
 
 @section('content')
     <div class="d-flex justify-content-center mt-4">
-        <form id="login-form" class="login-form d-flex flex-column form-group" action="" method="POST">
+        <form id="login-form" class="login-form d-flex flex-column form-group" action="{{ route('parents.handle-create') }}" method="POST">
             @csrf
             <h3 class="size-22 font-weight-bolder mb-4 text-center">Create Parent</h3>
+
+            @if(session('message'))
+                <div class="alert alert-danger">
+                    <ul class="pl-0 nav flex-column">
+                        <li>{{ session('message') }}</li>
+                    </ul>
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul class="pl-0 nav flex-column">
@@ -14,9 +23,11 @@
                     </ul>
                 </div>
             @endif
+
             {{ Form::select('parent_status_id', $parentStatuses, null, ['class' => 'custom-select m-b-30']) }}
             {{ Form::select('father_id', $fathers, null, ['class' => 'custom-select m-b-30']) }}
             {{ Form::select('mother_id', $mothers, null, ['class' => 'custom-select m-b-30']) }}
+
             <div class="input-group m-b-30">
                 <textarea class="form-control" name="description" placeholder="Description" cols="10"></textarea>
             </div>

@@ -43,7 +43,9 @@
                                 <a href="{!! route('persons.edit', ['id' => $person->people_id]) !!}">
                                     <i class="far fa-edit text-primary size-18 m-r-10"></i>
                                 </a>
-                                <i class="far fa-trash-alt size-18 text-danger"></i>
+                                <a href="{!! route('persons.delete', ['id' => $person->people_id]) !!}" onClick="return confirm('Are you sure?');">
+                                    <i class="far fa-trash-alt size-18 text-danger"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
