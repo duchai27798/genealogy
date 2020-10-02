@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ParentController;
 use App\Http\Controllers\Admin\PersonController;
 use App\Http\Controllers\Admin\UserManagement;
 use App\Http\Controllers\Client\AjaxController;
@@ -34,10 +35,21 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function ()
         Route::post('/create', [UserManagement::class, 'handleCreate'])->name('handle-create');
     });
 
-    Route::group(['prefix' => 'person-management', 'as' => 'persons.'], function () {
-        Route::get('/', [PersonController::class, 'dashboard'])->name('management');
-        Route::get('/create', [PersonController::class, 'create'])->name('create');
-        Route::post('/create', [PersonController::class, 'handleCreate'])->name('handle-create');
+    Route::group(['prefix' => 'person-management'], function () {
+        Route::get('/', [PersonController::class, 'dashboard'])->name('person-management');
+
+        Route::group(['prefix' => 'persons', 'as' => 'persons.'], function () {
+            Route::get('/create', [PersonController::class, 'create'])->name('create');
+            Route::post('/create', [PersonController::class, 'handleCreate'])->name('handle-create');
+            Route::get('/edit/{id}', [PersonController::class, 'edit'])->name('edit');
+            Route::post('/edit/{id}', [PersonController::class, 'handleEdit'])->name('handle-edit');
+            Route::get('/delete/{id}', [PersonController::class, 'destroy'])->name('delete');
+        });
+
+        Route::group(['prefix' => 'parents', 'as' => 'parents.'], function () {
+            Route::get('/create', [ParentController::class, 'create'])->name('create');
+            Route::post('/create', [ParentController::class, 'handleCreate'])->name('handle-create');
+        });
     });
 
     Route::get('/register', [AuthController::class, 'register'])->name('register');

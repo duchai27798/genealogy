@@ -42,7 +42,7 @@ abstract class BaseRepository implements Repository
         $result = $this->_model::find($id);
 
         if ($result) {
-            return $this->_model->update($object);
+            return $result->update($object);
         }
 
         return false;
@@ -50,7 +50,7 @@ abstract class BaseRepository implements Repository
 
     public function delete($id)
     {
-        $result = $this->_model->find($id);
+        $result = $this->_model::find($id);
 
         if ($result) {
             $result->delete();

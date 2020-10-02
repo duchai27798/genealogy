@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .login-container {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/bg-login.jpg") no-repeat center;
   background-size: cover;
@@ -232,7 +233,12 @@
   font-size: 3.875rem;
 }
 
-.admin-header {
+.header-wrapper {
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff;
+}
+.header-wrapper .admin-header {
   height: 60px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
@@ -280,31 +286,44 @@ abbr, acronym {
   height: 100% !important;
   border: none !important;
 }
-.Treant .collapsed .collapse-switch {
-  background-color: transparent !important;
-}
-.Treant .collapsed .collapse-switch:after {
-  content: "+";
+.Treant .collapse-switch:after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: bold;
   position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  font-size: 2rem;
-  bottom: -24px;
+  font-size: 1rem;
+  bottom: -11px;
+}
+.Treant .collapsed .collapse-switch {
+  background-color: transparent !important;
+}
+.Treant .collapsed .collapse-switch:after {
+  content: "\F07B";
 }
 
 .tree-node {
-  padding: 2px;
+  padding: 10px 20px;
   border-radius: 3px;
   background-color: #ffffff;
   border: 1px solid #000;
-  width: 200px;
+  width: 250px;
+  display: flex !important;
   font-size: 12px;
+}
+.tree-node .content {
+  flex-grow: 1;
 }
 .tree-node img {
   margin-right: 10px;
   width: 80px;
   height: 80px;
+}
+
+.table-custom th, .table-custom td {
+  vertical-align: middle !important;
 }

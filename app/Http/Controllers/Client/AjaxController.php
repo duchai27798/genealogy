@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\classes\TreeNode;
 use App\Http\Controllers\Controller;
 use App\Repositories\PersonRepository;
-use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
@@ -22,7 +20,11 @@ class AjaxController extends Controller
         $dataResource = collect();
 
         foreach ($listPerson as $person) {
-            $dataResource[$person->people_id] = new TreeNode($person->people_id, $person->fullName(), $person->parent);
+            $dataResource[$person->people_id] = (object) [
+                'id' => $person->people_id,
+                'name' => $person->getFullName(),
+                'parent' => $person->parent
+            ];
         }
 
         return $dataResource;
