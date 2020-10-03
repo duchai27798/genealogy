@@ -17,11 +17,12 @@ class CreatePeopleTable extends Migration
             $table->id('people_id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->timestamp('birthday');
+            $table->date('birthday');
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();
             $table->string('description')->nullable();
+            $table->string('img_src')->nullable();
             $table->bigInteger('person_status_id')->nullable()->unsigned();
             $table->bigInteger('parent_info_id')->nullable()->unsigned();
             $table->bigInteger('position_id')->nullable()->unsigned();

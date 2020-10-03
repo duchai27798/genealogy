@@ -19384,8 +19384,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/user/Documents/php/demo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/user/Documents/php/demo/resources/scss/main.scss */"./resources/scss/main.scss");
+__webpack_require__(/*! /home/smay/Documents/php/genealogy/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/smay/Documents/php/genealogy/resources/scss/main.scss */"./resources/scss/main.scss");
 
 
 /***/ })

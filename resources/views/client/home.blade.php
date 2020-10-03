@@ -7,13 +7,13 @@
         window.onload = function () {
             OrgChart.templates.ana.link = '<path stroke-linejoin="round" stroke="#802418" stroke-width="1px" fill="none" d="{edge}" />';
             OrgChart.templates.male = Object.assign({}, OrgChart.templates.ana);
-            OrgChart.templates.male.size = [200, 200];
+            OrgChart.templates.male.size = [200, 227];
             OrgChart.templates.male.node =
-                '<rect x="0" y="0" rx="5" ry="5" height="172" width="200" fill="#b5ae4e" stroke-width="1" stroke="#6e2e2a"></rect>' +
+                '<rect x="0" y="0" rx="5" ry="5" height="200" width="200" fill="#DB6624" stroke-width="0" stroke="#6e2e2a"></rect>' +
                 '<circle cx="100" cy="55" fill="#c4c4c4" r="35" stroke="#757575" stroke-width="0.5"></circle>';
 
-            OrgChart.templates.male.field_0 = '<text width="160" style="font-size: 16px;" fill="#b55b3f" x="100" y="120" text-anchor="middle" font-weight="bold">{val}</text>';
-            OrgChart.templates.male.field_1 = '<text width="160" style="font-size: 16px;" fill="#828282" x="100" y="140" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.male.field_0 = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="130" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.male.field_1 = '<text width="160" style="font-size: 14px;" fill="#ffffff" x="100" y="155" text-anchor="middle" font-weight="bold">{val}</text>';
 
             OrgChart.templates.male.img_0 =
                 '<clipPath id="{randId}"><circle  cx="100" cy="55" r="35"></circle></clipPath>' +
@@ -37,13 +37,13 @@
             }
 
             OrgChart.templates.female = Object.assign({}, OrgChart.templates.ana);
-            OrgChart.templates.female.size = [200, 200];
+            OrgChart.templates.female.size = [200, 227];
             OrgChart.templates.female.node =
-                '<rect x="0" y="0" rx="5" ry="5" height="172" width="200" fill="#b5ae4e" stroke-width="1" stroke="#6b84c7"></rect>' +
+                '<rect x="0" y="0" rx="5" ry="5" height="200" width="200" fill="#AA9E5C" stroke-width="0" stroke="#6b84c7"></rect>' +
                 '<circle cx="100" cy="55" fill="#c4c4c4" r="35" stroke="#757575" stroke-width="0.5"></circle>';
 
-            OrgChart.templates.female.field_0 = '<text width="160" style="font-size: 16px;" fill="#6b84c7" x="100" y="120" text-anchor="middle" font-weight="bold">{val}</text>';
-            OrgChart.templates.female.field_1 = '<text width="160" style="font-size: 16px;" fill="#828282" x="100" y="140" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.female.field_0 = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="130" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.female.field_1 = '<text width="160" style="font-size: 14px;" fill="#ffffff" x="100" y="155" text-anchor="middle" font-weight="bold">{val}</text>';
 
             OrgChart.templates.female.img_0 =
                 '<clipPath id="{randId}"><circle  cx="100" cy="55" r="35"></circle></clipPath>' +
@@ -87,13 +87,6 @@
                     field_1: "birthday",
                     img_0: "img"
                 },
-                nodeMenu: {
-                    details: {
-                        text: "Details",
-                        icon: ''
-                    }
-                },
-
             });
 
             $.ajax({

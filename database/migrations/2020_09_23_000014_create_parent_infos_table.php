@@ -18,8 +18,8 @@ class CreateParentInfosTable extends Migration
             $table->bigInteger('mother_id')->nullable()->unsigned();
             $table->bigInteger('father_id')->nullable()->unsigned();
             $table->bigInteger('parent_status_id')->nullable()->unsigned();
-            $table->timestamp('wedding_date');
-            $table->timestamp('divorce_date');
+            $table->date('wedding_date');
+            $table->date('divorce_date');
             $table->string('description');
             $table->timestamps();
 
