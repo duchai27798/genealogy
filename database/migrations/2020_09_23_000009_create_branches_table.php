@@ -17,7 +17,7 @@ class CreateBranchesTable extends Migration
             $table->id('branch_id');
             $table->string('name');
             $table->bigInteger('clan_id')->nullable()->unsigned();
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('location_address');
             $table->timestamps();
 

@@ -17,7 +17,7 @@ class CreateClansTable extends Migration
             $table->id('clan_id');
             $table->string('name');
             $table->bigInteger('user_id')->unsigned()->nullable()->unique();
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('location_address');
             $table->timestamps();
 

@@ -20,13 +20,18 @@ class AjaxController extends Controller
         $dataResource = collect();
 
         foreach ($listPerson as $person) {
-            $dataResource[$person->people_id] = (object) [
-                'id' => $person->people_id,
-                'name' => $person->getFullName(),
-                'birthday' => $person->getBirthday(),
-                'gender' => $person->gender->name,
-                'parent' => $person->parent
-            ];
+
+            if ($person->isGrandChildren()) {
+                $dataResource[$person->people_id] = (object) [
+                    'id' => $person->people_id,
+                    'firstname' => $person->firstname,
+                    'lastname' => $person->lastname,
+                    'birthday' => $person->getBirthday(),
+                    'gender' => $person->gender->name,
+                    'parent' => $person->parent,
+                    'img_src' => $person->img_src
+                ];
+            }
         }
 
         return $dataResource;

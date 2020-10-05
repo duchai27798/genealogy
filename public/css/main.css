@@ -324,6 +324,11 @@ abbr, acronym {
   height: 80px;
 }
 
+.genealogy-tree {
+  height: 100vh;
+  background-color: #1F1F1F;
+}
+
 .table-custom th, .table-custom td {
   vertical-align: middle !important;
 }

@@ -1,21 +1,24 @@
 @extends('layouts.main-layout')
 
 @section('content')
-    <div id="tree" style="height: 100vh"></div>
+    <script src="{{ asset('js/OrgChart.js') }}"></script>
+
+    <div id="tree" class="genealogy-tree"></div>
 
     <script>
-        window.onload = function () {
-            OrgChart.templates.ana.link = '<path stroke-linejoin="round" stroke="#802418" stroke-width="2px" fill="none" d="{edge}" />';
+        $(document).ready(function () {
+            OrgChart.templates.ana.link = '<path stroke-linejoin="round" stroke="#9CC3D5FF" stroke-width="1px" fill="none" d="{edge}" />';
             OrgChart.templates.male = Object.assign({}, OrgChart.templates.ana);
-            OrgChart.templates.male.size = [200, 200];
+            OrgChart.templates.male.size = [200, 277];
             OrgChart.templates.male.node =
-                '<rect x="0" y="0" rx="5" ry="5" height="172" width="200" fill="#b5ae4e" stroke-width="2" stroke="#6e2e2a"></rect>' +
+                '<rect x="0" y="0" rx="5" ry="5" height="250" width="200" fill="#5F4B8BFF" stroke-width="0" stroke="#6e2e2a"></rect>' +
                 '<circle cx="100" cy="55" fill="#c4c4c4" r="35" stroke="#757575" stroke-width="0.5"></circle>';
 
-            OrgChart.templates.male.field_0 = '<text width="160" style="font-size: 16px;" fill="#b55b3f" x="100" y="120" text-anchor="middle" font-weight="bold">{val}</text>';
-            OrgChart.templates.male.field_1 = '<text width="160" style="font-size: 16px;" fill="#828282" x="100" y="140" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.male.firstname = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="135" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.male.lastname = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="165" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.male.birthday = '<text width="160" style="font-size: 14px;" fill="#ffffff" x="100" y="205" text-anchor="middle" font-weight="bold">{val}</text>';
 
-            OrgChart.templates.male.img_0 =
+            OrgChart.templates.male.img_src =
                 '<clipPath id="{randId}"><circle  cx="100" cy="55" r="35"></circle></clipPath>' +
                 '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="15"  width="80" height="80"></image>';
 
@@ -37,15 +40,16 @@
             }
 
             OrgChart.templates.female = Object.assign({}, OrgChart.templates.ana);
-            OrgChart.templates.female.size = [200, 200];
+            OrgChart.templates.female.size = [200, 277];
             OrgChart.templates.female.node =
-                '<rect x="0" y="0" rx="5" ry="5" height="172" width="200" fill="#b5ae4e" stroke-width="4" stroke="#6b84c7"></rect>' +
+                '<rect x="0" y="0" rx="5" ry="5" height="250" width="200" fill="#E69A8DFF" stroke-width="0" stroke="#6b84c7"></rect>' +
                 '<circle cx="100" cy="55" fill="#c4c4c4" r="35" stroke="#757575" stroke-width="0.5"></circle>';
 
-            OrgChart.templates.female.field_0 = '<text width="160" style="font-size: 16px;" fill="#6b84c7" x="100" y="120" text-anchor="middle" font-weight="bold">{val}</text>';
-            OrgChart.templates.female.field_1 = '<text width="160" style="font-size: 16px;" fill="#828282" x="100" y="140" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.female.firstname = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="135" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.female.lastname = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="165" text-anchor="middle" font-weight="bold">{val}</text>';
+            OrgChart.templates.female.birthday = '<text width="160" style="font-size: 14px;" fill="#ffffff" x="100" y="205" text-anchor="middle" font-weight="bold">{val}</text>';
 
-            OrgChart.templates.female.img_0 =
+            OrgChart.templates.female.img_src =
                 '<clipPath id="{randId}"><circle  cx="100" cy="55" r="35"></circle></clipPath>' +
                 '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="15"  width="80" height="80"></image>';
 
@@ -83,17 +87,11 @@
                 },
                 template: "male",
                 nodeBinding: {
-                    field_0: "name",
-                    field_1: "birthday",
-                    img_0: "img"
+                    firstname: "firstname",
+                    lastname: "lastname",
+                    birthday: "birthday",
+                    img_src: "img_src"
                 },
-                nodeMenu: {
-                    details: {
-                        text: "Details",
-                        icon: ''
-                    }
-                },
-
             });
 
             $.ajax({
@@ -101,26 +99,23 @@
                 method: 'get',
                 success: function (data) {
                     let nodeData = _.map(data, item => {
-                        let obj = {
-                            id: item.id,
-                            pid: _.get(item, 'parent.father_id') || _.get(item, 'parent.mother_id'),
-                            name: item.name,
-                            birthday: item.birthday,
-                            img: 'images/nguyen.png',
+                        item['pid'] = _.get(item, 'parent.father_id') || _.get(item, 'parent.mother_id');
+                        if (!item['img_src']) {
+                            item['img_src'] = item['gender'] === 'male' ? 'images/male.jpg' : 'images/female.jpg';
                         }
 
                         if (item['gender'] === 'female') {
-                            obj['tags'] = ['female'];
+                            item['tags'] = ['female'];
                         }
 
-                        return obj;
-                    });
 
-                    console.log(nodeData);
+
+                        return item;
+                    });
 
                     chart.load(nodeData);
                 }
             })
-        }
+        })
     </script>
 @endsection

@@ -8,7 +8,10 @@ use App\Repositories\GenderRepository;
 use App\Repositories\ParentInfoRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\PersonStatusRepository;
+use App\Repositories\PositionRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PersonController extends Controller
 {
@@ -16,17 +19,20 @@ class PersonController extends Controller
     private $personRepository;
     private $parentInfoRepository;
     private $personStatusRepository;
+    private $positionRepository;
 
     public function __construct(
         GenderRepository $genderRepository,
         PersonRepository $personRepository,
         ParentInfoRepository $parentInfoRepository,
-        PersonStatusRepository $personStatusRepository
+        PersonStatusRepository $personStatusRepository,
+        PositionRepository $positionRepository
     ) {
         $this->genderRepository = $genderRepository;
         $this->personRepository = $personRepository;
         $this->parentInfoRepository = $parentInfoRepository;
         $this->personStatusRepository = $personStatusRepository;
+        $this->positionRepository = $positionRepository;
     }
 
     function dashboard()
@@ -46,6 +52,7 @@ class PersonController extends Controller
             'genders' => $this->getListGender(),
             'parents' => $this->getListParent(),
             'person' => null,
+            'positions' => $this->getListPosition(),
         ]);
     }
 
@@ -54,6 +61,7 @@ class PersonController extends Controller
         $user = $request->all();
 
         unset($user['_token']);
+        unset($user['img']);
 
         $this->personRepository->create($user);
 
@@ -68,14 +76,39 @@ class PersonController extends Controller
             'personStatuses' => $this->getListPersonStatus(),
             'parents' => $this->getListParent(),
             'genders' => $this->getListGender(),
+            'positions' => $this->getListPosition(),
         ]);
     }
 
-    public function handleEdit(PersonRequest $request, $id)
+    public function handleEdit(Request $request, $id)
     {
         $user = $request->all();
 
+        if ($request->hasFile('img')) {
+            $image      = $request->file('img');
+            $fileName   = time() . '.' . $image->getClientOriginalExtension();
+
+            $img = Image::make($image->getRealPath());
+
+            $img->stream(); // <-- Key point
+
+            //dd();
+            $isUploaded = Storage::disk('public')->put('images'.'/'.$fileName, $img, 'public');
+
+            if ($isUploaded === true) {
+                $user['img_src'] = 'images'.'/'.$fileName;
+
+                $this->update($user, $id);
+            }
+        } else {
+            $this->update($user, $id);
+        }
+    }
+
+    public function update($user, $id)
+    {
         unset($user['_token']);
+        unset($user['img']);
 
         $this->personRepository->update($id, $user);
 
@@ -127,5 +160,17 @@ class PersonController extends Controller
         }
 
         return $parents;
+    }
+
+    public function getListPosition()
+    {
+        $listPosition = $this->positionRepository->getAll();
+        $positions = collect();
+
+        foreach ($listPosition as $position) {
+            $positions[$position->position_id] = $position->name;
+        }
+
+        return $positions;
     }
 }

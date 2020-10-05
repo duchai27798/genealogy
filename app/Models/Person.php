@@ -18,6 +18,7 @@ class Person extends Model
         'email',
         'gender_id',
         'person_status_id',
+        'img_src',
         'parent_info_id',
         'phone_number',
         'address',
@@ -37,6 +38,11 @@ class Person extends Model
     public function gender()
     {
         return $this->belongsTo(Gender::class, 'gender_id');
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class, 'position_id');
     }
 
     public function status()
@@ -65,5 +71,18 @@ class Person extends Model
     public function getBirthday()
     {
         return date("Y-m-d", strtotime($this->birthday));
+    }
+
+    public function isGrandChildren()
+    {
+        if ($this->position && $this->position->name === 'root') {
+            return true;
+        }
+
+        if ($this->parent && $this->parent->father && ($this->parent->father->position->name === 'child' || $this->parent->father->position->name === 'root')) {
+            return true;
+        }
+
+        return false;
     }
 }
