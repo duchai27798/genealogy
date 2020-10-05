@@ -96,7 +96,7 @@ class PersonController extends Controller
             $isUploaded = Storage::disk('public')->put('images'.'/'.$fileName, $img, 'public');
 
             if ($isUploaded === true) {
-                $user['img_src'] = 'images'.'/'.$fileName;
+                $user['img_src'] = 'storage/images'.'/'.$fileName;
 
                 $this->update($user, $id);
             }
