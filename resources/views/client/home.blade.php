@@ -18,7 +18,7 @@
             OrgChart.templates.male.lastname = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="165" text-anchor="middle" font-weight="bold">{val}</text>';
             OrgChart.templates.male.birthday = '<text width="160" style="font-size: 14px;" fill="#ffffff" x="100" y="205" text-anchor="middle" font-weight="bold">{val}</text>';
 
-            OrgChart.templates.male.img =
+            OrgChart.templates.male.img_src =
                 '<clipPath id="{randId}"><circle  cx="100" cy="55" r="35"></circle></clipPath>' +
                 '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="15"  width="80" height="80"></image>';
 
@@ -49,7 +49,7 @@
             OrgChart.templates.female.lastname = '<text width="160" style="font-size: 22px;" fill="#ffffff" x="100" y="165" text-anchor="middle" font-weight="bold">{val}</text>';
             OrgChart.templates.female.birthday = '<text width="160" style="font-size: 14px;" fill="#ffffff" x="100" y="205" text-anchor="middle" font-weight="bold">{val}</text>';
 
-            OrgChart.templates.female.img =
+            OrgChart.templates.female.img_src =
                 '<clipPath id="{randId}"><circle  cx="100" cy="55" r="35"></circle></clipPath>' +
                 '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="15"  width="80" height="80"></image>';
 
@@ -90,7 +90,7 @@
                     firstname: "firstname",
                     lastname: "lastname",
                     birthday: "birthday",
-                    img: "img"
+                    img_src: "img_src"
                 },
             });
 
@@ -99,20 +99,16 @@
                 method: 'get',
                 success: function (data) {
                     let nodeData = _.map(data, item => {
-                        // let obj = {
-                        //     id: item.id,
-                        //     pid: _.get(item, 'parent.father_id') || _.get(item, 'parent.mother_id'),
-                        //     birthday: item.birthday,
-                        //     img: 'images/male.jpg',
-                        // }
-
                         item['pid'] = _.get(item, 'parent.father_id') || _.get(item, 'parent.mother_id');
-                        item['img'] = 'images/male.jpg';
+                        if (!item['img_src']) {
+                            item['img_src'] = item['gender'] === 'male' ? 'images/male.jpg' : 'images/female.jpg';
+                        }
 
                         if (item['gender'] === 'female') {
                             item['tags'] = ['female'];
-                            item['img'] = 'images/female.jpg';
                         }
+
+
 
                         return item;
                     });

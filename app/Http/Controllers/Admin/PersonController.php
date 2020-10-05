@@ -11,6 +11,7 @@ use App\Repositories\PersonStatusRepository;
 use App\Repositories\PositionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PersonController extends Controller
 {
@@ -79,20 +80,39 @@ class PersonController extends Controller
         ]);
     }
 
-    public function handleEdit(PersonRequest $request, $id)
+    public function handleEdit(Request $request, $id)
     {
         $user = $request->all();
 
         if ($request->hasFile('img')) {
-            $user['img_src'] = Storage::putFile('images', $request->file('img'));
-        }
+            $image      = $request->file('img');
+            $fileName   = time() . '.' . $image->getClientOriginalExtension();
 
+            $img = Image::make($image->getRealPath());
+
+            $img->stream(); // <-- Key point
+
+            //dd();
+            $isUploaded = Storage::disk('public')->put('images'.'/'.$fileName, $img, 'public');
+
+            if ($isUploaded === true) {
+                $user['img_src'] = 'images'.'/'.$fileName;
+
+                $this->update($user, $id);
+            }
+        } else {
+            $this->update($user, $id);
+        }
+    }
+
+    public function update($user, $id)
+    {
         unset($user['_token']);
         unset($user['img']);
 
         $this->personRepository->update($id, $user);
 
-//        return redirect()->route('person-management');
+        return redirect()->route('person-management');
     }
 
     public function destroy(Request $request, $id)

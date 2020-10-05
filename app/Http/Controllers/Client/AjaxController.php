@@ -28,7 +28,8 @@ class AjaxController extends Controller
                     'lastname' => $person->lastname,
                     'birthday' => $person->getBirthday(),
                     'gender' => $person->gender->name,
-                    'parent' => $person->parent
+                    'parent' => $person->parent,
+                    'img_src' => $person->img_src
                 ];
             }
         }

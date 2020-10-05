@@ -18,6 +18,7 @@ class Person extends Model
         'email',
         'gender_id',
         'person_status_id',
+        'img_src',
         'parent_info_id',
         'phone_number',
         'address',
