@@ -11,7 +11,11 @@ class UploadImgController extends Controller
 {
     public function uploadImg()
     {
-        return view('client.upload-file', ['files' => Storage::files('public/images/files')]);
+        $files = array_map(function ($filename) {
+            return str_replace('public', 'storage', $filename);
+        }, Storage::files('public/images/files'));
+
+        return view('client.upload-file', ['files' => $files]);
     }
 
     public function handleUploadImg(Request $request)
@@ -20,7 +24,9 @@ class UploadImgController extends Controller
 
         foreach ($data as $key => $item) {
             if (strpos($key, 'file-') !== false) {
-                $fileName   = microtime() . '.' . $item->getClientOriginalExtension();
+                $fileName = microtime() . '.' . $item->getClientOriginalExtension();
+
+                $fileName = str_replace(' ', '-', $fileName);
 
                 $img = Image::make($item->getRealPath());
 
