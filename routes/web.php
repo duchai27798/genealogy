@@ -59,6 +59,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'checkAuth'], function ()
 
 Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], function () {
     Route::get('resource-tree', [AjaxController::class, 'getResourceTree'])->name('resource-tree');
+    Route::post('handle-upload-img', [UploadImgController::class, 'handleUploadImg'])->name('handle-upload-img');
 });
 
 Route::get('upload-file', [UploadImgController::class, 'uploadImg'])->name('upload-img');

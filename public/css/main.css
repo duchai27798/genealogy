@@ -13,6 +13,10 @@
   width: 500px;
 }
 
+.preview-img-item {
+  width: 200px !important;
+}
+
 /* Generate Margin */
 .m-l-10 {
   margin-left: 10px;
