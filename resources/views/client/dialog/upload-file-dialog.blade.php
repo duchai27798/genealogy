@@ -11,9 +11,10 @@
             <div class="modal-body">
                 <form enctype="multipart/form-data" id="form-upload-img" method="post">
                     @csrf
-                    <input type="file" name="collect-image" class="form-control" id="input-file" multiple>
+                    <input type="file" class="d-none" id="input-file" multiple>
+                    <label class="btn btn-success" for="input-file">Add Asset</label>
                 </form>
-                <div id="preview-img"></div>
+                <div id="preview-img" class="d-flex justify-content-around flex-wrap"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -25,6 +26,7 @@
 
 <script>
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    let fileList = [];
 
     $('#open-modal-upload').click(function () {
         clearInputUpload();
@@ -35,7 +37,7 @@
         let validateSuccess = true;
 
         if (_.get(e, 'target.files')) {
-            if (e.target.files.length > 5) {
+            if (e.target.files.length + fileList.length > 5) {
                 alert('Upload maximum 5 file');
                 clearInputUpload();
             }
@@ -57,37 +59,60 @@
             });
 
             if (validateSuccess) {
-                const previewImg = $('#preview-img');
-                previewImg.empty();
-
-                _.forEach(_.get(e, 'target.files'), item => {
-                    const img = document.createElement("img");
-
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        img.src = e.target.result;
-                        img.classList = 'w-50'
-                    }
-
-                    reader.readAsDataURL(item);
-
-                    previewImg.append(img);
+                _.forEach(_.get(e, 'target.files'), file => {
+                    file.filename = `${Date.now()}-${file['name']}`;
+                    fileList.push(file)
                 });
+                renderPreview(fileList);
             }
         }
     });
+
+    function renderPreview(files) {
+        const previewImg = $('#preview-img');
+        previewImg.empty();
+
+        _.forEach(files, item => {
+            const container = document.createElement('div');
+            const btnRemove = document.createElement('div');
+            const icon = document.createElement('i');
+            const img = document.createElement('img');
+
+            container.classList = 'preview-img-item mt-3';
+            btnRemove.classList = 'btn-remove';
+            icon.classList = 'far fa-trash-alt size-36 text-danger';
+
+            btnRemove.onclick = () => removeItemImgPreview(item['filename']);
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                img.src = e.target.result;
+                img.classList = 'w-100'
+            }
+
+            reader.readAsDataURL(item);
+
+            container.append(img);
+            btnRemove.append(icon);
+            container.append(btnRemove);
+            previewImg.append(container);
+        });
+    }
+
+    function removeItemImgPreview(filename) {
+        fileList = _.filter(fileList, file => file['filename'] !== filename);
+        renderPreview(fileList);
+    }
 
     $('#form-upload-img').submit(function (e) {
         e.preventDefault();
 
         const data = $(this).serializeArray();
 
-        const fileData = $('#input-file').prop('files');
-
         const formData = new FormData();
 
-        _.forEach(fileData, (file, key) => {
+        _.forEach(fileList, (file, key) => {
             formData.append(`file-${key}`, file);
         });
 
@@ -100,8 +125,8 @@
             processData: false,
             contentType: false,
             success: function (res) {
-                console.log(res)
                 if (res) {
+                    clearInputUpload();
                     $('#modal-upload-file').modal('hide');
                 }
             }
@@ -109,6 +134,8 @@
     })
 
     function clearInputUpload() {
+        fileList = [];
         $('#input-file').val('');
+        $('#preview-img').empty();
     }
 </script>

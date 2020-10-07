@@ -12,8 +12,10 @@ class UploadImgController extends Controller
     public function uploadImg()
     {
         $files = array_map(function ($filename) {
-            return str_replace('public', 'storage', $filename);
-        }, Storage::files('public/images/files'));
+            return Storage::url(substr($filename, strrpos($filename, '/') + 1));
+        }, Storage::disk('public')->files('images/files'));
+
+//        dd($files);
 
         return view('client.upload-file', ['files' => $files]);
     }
